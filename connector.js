@@ -1,5 +1,18 @@
+
+
 function svg_connector() {
   var connectType = "linear-step";
+
+  function svg_connector_linear_step(d) {
+      return "M " + d[0] + 
+        " H " + alongX(d[0], d[1], 0.3) + 
+        " V"  + alongY(d[0], d[1], 1) + 
+        " H"  + alongX(d[0], d[1], 1) + 
+        " L " + d[2] +  // Right side straight line
+        " H " + (alongX(d[2], d[3], 0.6)) + 
+        " V"  + alongY(d[3], d[2], 0) + 
+        " L " + d[3] + " Z";
+  }
 
   function pointAlong(p1,p2, r) { 
     return [alongX(p1, p2, r), alongY(p1,p2,r)];
@@ -19,14 +32,11 @@ function svg_connector() {
     return value;
   }
   function connector(d) {
-    return "M " + d[0] + 
-      " H " + alongX(d[0], d[1], 0.3) + 
-      " V"  + alongY(d[0], d[1], 1) + 
-      " H"  + alongX(d[0], d[1], 1) + 
-      " L " + d[2] +  // Right side straight line
-      " H " + (alongX(d[2], d[3], 0.6)) + 
-      " V"  + alongY(d[3], d[2], 0) + 
-      " L " + d[3] + " Z";
+    if(connectType == "linear-step") {
+      return svg_connector_linear_step(d);
+    } else {
+      return "";
+    }
   }
   connector.type = function(t) {
     if (! arguments.length) { return connectType; }
