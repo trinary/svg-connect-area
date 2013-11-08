@@ -14,8 +14,6 @@
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="curve.js"></script>
 <script>
-  var rectwidth = [20,20];
-  
   var svg = d3.select("body").append("svg");
   var p1 = [10,10], p2 = [300,80], p3 = [300,300], p4 = [10,220];
   var points = [p1,p2, p3,p4];
@@ -30,7 +28,7 @@
   handles.enter()
     .append("rect")
     .attr({
-      width: function(d,i) { return rectwidth[i]; },
+      width: 20,
       height: function(d,i) { return d[1][1] - d[0][1];},
       x: function(d,i) { return d[0][0]; },
       y: function(d,i) { return d[0][1]; },

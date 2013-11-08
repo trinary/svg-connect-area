@@ -21,18 +21,13 @@ curve = function() {
     return value;
   }
   function curve(d) {
-    var control1a = pointAlong(d[0], d[1], 0.45);
-    var control1b = pointAlong(d[0], d[1], 0.55);
-    var mid = pointAlong(d[0], d[2], 0.5);
-    var control2a = pointAlong(d[2], d[3], 0.8);
-    var control2b = pointAlong(d[2], d[3], 0.2);
 
     return "M " + d[0] + 
       " H " + alongX(d[0], d[1], 0.3) + 
       " V"  + alongY(d[0], d[1], 1) + 
       " H"  + alongX(d[0], d[1], 1) + 
       " L " + d[2] +  // Right side straight line
-      " H " + (alongX(d[2], d[3], 0.7)) + 
+      " H " + (alongX(d[2], d[3], 0.6)) + 
       " V"  + alongY(d[3], d[2], 0) + 
       " L " + d[3] + " Z";
   }
