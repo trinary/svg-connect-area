@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<h1 id="title">svg-connecting-area</h1>
+<h1 id="title">svg-connect-area</h1>
 <p>javascript library for creating join areas for four points</p>
 
 <script id="live-reload" src="http://localhost:35729/livereload.js"></script>
@@ -30,7 +30,7 @@
     .attr({
       width: 20,
       height: function(d,i) { return d[1][1] - d[0][1];},
-      x: function(d,i) { return d[0][0]; },
+      x: function(d,i) { return i==0 ? d[0][0] - 20 : d[0][0]; },
       y: function(d,i) { return d[0][1]; },
       class: function(d,i) { return i==0 ? "left" : "right" }
         })
