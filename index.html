@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>svg-curved-area</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1 id="title">svg-connecting-area</h1>
+<p>javascript library for creating join areas for four points</p>
+
+<script id="live-reload" src="http://localhost:35729/livereload.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="curve.js"></script>
+<script>
+  var rectwidth = [20,20];
+  
+  var svg = d3.select("body").append("svg");
+  var p1 = [10,10], p2 = [300,80], p3 = [300,300], p4 = [10,220];
+  var points = [p1,p2, p3,p4];
+  var myCurveFn = curve();
+
+  var handles = svg.append("g")
+    .classed("handles", true)
+    .selectAll("rect")
+    .data([[p1,p4], [p2,p3]]);
+
+  var myCurve = svg.append("path").classed("curve", true).attr("d", myCurveFn(points));
+  handles.enter()
+    .append("rect")
+    .attr({
+      width: function(d,i) { return rectwidth[i]; },
+      height: function(d,i) { return d[1][1] - d[0][1];},
+      x: function(d,i) { return d[0][0]; },
+      y: function(d,i) { return d[0][1]; },
+      class: function(d,i) { return i==0 ? "left" : "right" }
+        })
+    .style({
+      fill: "#cccccc",
+      stroke: "#333333",
+      "stroke-width": "1px"
+    })
+    .call(d3.behavior.drag()
+        .origin(function(d) { return {x: d[0][0], y:d[0][1]}; })
+          .on("drag", function(d) {
+            d.x = d3.event.x, d.y = d3.event.y;
+            var handle = d3.select(this);
+            handle.attr("x", d.x).attr("y", d.y);
+            if (handle.classed("left")) {
+              points[0][0] += d3.event.dx;
+              points[0][1] += d3.event.dy;
+              points[3][0] += d3.event.dx;
+              points[3][1] += d3.event.dy;
+            } else {
+              points[1][0] += d3.event.dx;
+              points[1][1] += d3.event.dy;
+              points[2][0] += d3.event.dx;
+              points[2][1] += d3.event.dy;
+            }
+            myCurve.attr("d", curve()(points));
+          }));
+
+</script>
+</body>
+</html>
