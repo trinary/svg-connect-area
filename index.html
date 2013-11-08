@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>svg-curved-area</title>
+  <title>svg-connect-area</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,19 +12,19 @@
 
 <script id="live-reload" src="http://localhost:35729/livereload.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="curve.js"></script>
+<script src="connector.js"></script>
 <script>
   var svg = d3.select("body").append("svg");
   var p1 = [10,10], p2 = [300,80], p3 = [300,300], p4 = [10,220];
   var points = [p1,p2, p3,p4];
-  var myCurveFn = curve();
+  var connectFn = connector();
 
   var handles = svg.append("g")
     .classed("handles", true)
     .selectAll("rect")
     .data([[p1,p4], [p2,p3]]);
 
-  var myCurve = svg.append("path").classed("curve", true).attr("d", myCurveFn(points));
+  var myConn = svg.append("path").classed("connect", true).attr("d", connectFn(points));
   handles.enter()
     .append("rect")
     .attr({
@@ -56,7 +56,7 @@
               points[2][0] += d3.event.dx;
               points[2][1] += d3.event.dy;
             }
-            myCurve.attr("d", curve()(points));
+            myConn.attr("d", connector()(points));
           }));
 
 </script>

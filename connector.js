@@ -1,8 +1,11 @@
-function curve_functor(v) {
-  return typeof v === "function" ? v : function() { return v; };
-}
+connector = function() {
+  var connectType = "linear-step";
 
-curve = function() {
+  function type(t) {
+    if (! arguments.length) { return connectType; }
+    connectType = t;
+    return connector;
+  }
   function pointAlong(p1,p2, r) { 
     return [alongX(p1, p2, r), alongY(p1,p2,r)];
   }
@@ -20,8 +23,7 @@ curve = function() {
     value = p1[1] + dy;
     return value;
   }
-  function curve(d) {
-
+  function connector(d) {
     return "M " + d[0] + 
       " H " + alongX(d[0], d[1], 0.3) + 
       " V"  + alongY(d[0], d[1], 1) + 
@@ -31,5 +33,5 @@ curve = function() {
       " V"  + alongY(d[3], d[2], 0) + 
       " L " + d[3] + " Z";
   }
-  return curve;
+  return connector;
 };
