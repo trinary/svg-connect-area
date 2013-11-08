@@ -1,11 +1,6 @@
-connector = function() {
+function svg_connector() {
   var connectType = "linear-step";
 
-  function type(t) {
-    if (! arguments.length) { return connectType; }
-    connectType = t;
-    return connector;
-  }
   function pointAlong(p1,p2, r) { 
     return [alongX(p1, p2, r), alongY(p1,p2,r)];
   }
@@ -33,5 +28,14 @@ connector = function() {
       " V"  + alongY(d[3], d[2], 0) + 
       " L " + d[3] + " Z";
   }
+  connector.type = function(t) {
+    if (! arguments.length) { return connectType; }
+    connectType = t;
+    return connector;
+  };
   return connector;
+}
+
+svgConnector = function() {
+  return svg_connector();
 };

@@ -17,7 +17,7 @@
   var svg = d3.select("body").append("svg");
   var p1 = [10,10], p2 = [300,80], p3 = [300,300], p4 = [10,220];
   var points = [p1,p2, p3,p4];
-  var connectFn = connector();
+  var connectFn = svgConnector();
 
   var handles = svg.append("g")
     .classed("handles", true)
@@ -56,7 +56,7 @@
               points[2][0] += d3.event.dx;
               points[2][1] += d3.event.dy;
             }
-            myConn.attr("d", connector()(points));
+            myConn.attr("d", connectFn(points));
           }));
 
 </script>
