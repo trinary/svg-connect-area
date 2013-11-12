@@ -17,33 +17,33 @@ function alongY(p1, p2, r) {
 }
 
 function svg_connector_linear(d) {
-  var left = d[0], right = d[1];
-  return "M " + left[0] + " L " + right[0] +
-         " L " + right[1] + " L " + left[1] + " Z";
+  var first = d[0], second = d[1];
+  return "M " + first[0] + " L " + second[0] +
+         " L " + second[1] + " L " + first[1] + " Z";
 }
 
 function svg_connector_linear_step(d) {
-  var left = d[0], right = d[1];
+  var first = d[0], second = d[1];
   var breakpoint = 0.3;
-  if( right[1][1] > left[0][1]) {
+  if( second[1][1] > first[0][1]) {
     breakpoint = 0.6;
   }
-  return "M " + left[0] + 
-    " H " + alongX(left[0], right[0], breakpoint) + 
-    " V"  + alongY(left[0], right[0], 1) + 
-    " H"  + alongX(left[0], right[0], 1) + 
-    " L " + right[1] +  // Right side straight line
-    " H " + (alongX(right[1], left[1], breakpoint)) + 
-    " V"  + alongY(right[1], left[1], 1) + 
-    " L " + left[1] + " Z";
+  return "M " + first[0] + 
+    " H " + alongX(first[0], second[0], breakpoint) + 
+    " V"  + alongY(first[0], second[0], 1) + 
+    " H"  + alongX(first[0], second[0], 1) + 
+    " L " + second[1] +  // second side straight line
+    " H " + (alongX(second[1], first[1], breakpoint)) + 
+    " V"  + alongY(second[1], first[1], 1) + 
+    " L " + first[1] + " Z";
 }
 
 function svg_connector() {
   var connectTypes = { "linear-step": svg_connector_linear_step,
                        "linear": svg_connector_linear } ;
   var connectFn = svg_connector_linear_step;
-  var xFn = function(point) { return point[0]},
-      yFn = function(point) { return point[1]};
+  var xFn = function(point) { return point[0]; },
+      yFn = function(point) { return point[1]; };
 
   function connector(d) {
     var points = [[xFn(d[0]), yFn(d[0])], [xFn(d[1]),yFn(d[1])]];
