@@ -46,7 +46,7 @@ function svg_connector() {
       yFn = function(point) { return point[1]};
 
   function connector(d) {
-    points = [[xFn(d[0]), yFn(d[0])], [xFn(d[1]),yFn(d[1])]];
+    var points = [[xFn(d[0]), yFn(d[0])], [xFn(d[1]),yFn(d[1])]];
     return connectFn(points);
   }
 
