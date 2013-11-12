@@ -17,7 +17,7 @@
   var svg = d3.select("body").append("svg");
   var p1 = [30,10], p2 = [300,80], p3 = [300,300], p4 = [30,120];
   var points = [[p1,p4], [p2,p3]];
-  var connectFn = svgConnector();
+  var connectFn = svgConnector().type(function(d) { return "M " + d[0] + " L " + d[1]; });
 
   var handles = svg.append("g")
     .classed("handles", true)
