@@ -26,6 +26,7 @@ function svg_connector_linear_step(d) {
   var first = d[0], second = d[1];
   var breakpoint = 0.3;
   if( second[1][1] > first[0][1]) {
+    // switch break to prevent overlap
     breakpoint = 0.6;
   }
   return "M " + first[0] + 
