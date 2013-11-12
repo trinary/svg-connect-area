@@ -18,18 +18,19 @@ function alongY(p1, p2, r) {
 }
 
 function svg_connector_linear_step(d) {
+    var left = d[0], right = d[1];
     var breakpoint = 0.3;
-    if( d[1][1] > d[0][1]) {
+    if( right[1][1] > left[0][1]) {
       breakpoint = 0.6;
     }
-    return "M " + d[0] + 
-      " H " + alongX(d[0], d[1], breakpoint) + 
-      " V"  + alongY(d[0], d[1], 1) + 
-      " H"  + alongX(d[0], d[1], 1) + 
-      " L " + d[2] +  // Right side straight line
-      " H " + (alongX(d[2], d[3], breakpoint)) + 
-      " V"  + alongY(d[3], d[2], 0) + 
-      " L " + d[3] + " Z";
+    return "M " + left[0] + 
+      " H " + alongX(left[0], right[0], breakpoint) + 
+      " V"  + alongY(left[0], right[0], 1) + 
+      " H"  + alongX(left[0], right[0], 1) + 
+      " L " + right[1] +  // Right side straight line
+      " H " + (alongX(right[1], left[1], breakpoint)) + 
+      " V"  + alongY(right[1], left[1], 1) + 
+      " L " + left[1] + " Z";
 }
 
 function svg_connector() {
@@ -43,8 +44,8 @@ function svg_connector() {
 
   connector.type = function(t) {
     if (! arguments.length) { return connectType; }
-    if (typeof(t) == "function") { connectFn = t; }
-    else { connectFn = connectTypes[t]; }
+    if (typeof(t) == "function") { connectFn = t }
+    else { connectFn = connectTypes[t]}
     return connector;
   };
   return connector;

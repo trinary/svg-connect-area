@@ -16,13 +16,13 @@
 <script>
   var svg = d3.select("body").append("svg");
   var p1 = [30,10], p2 = [300,80], p3 = [300,300], p4 = [30,120];
-  var points = [p1,p2, p3,p4];
+  var points = [[p1,p4], [p2,p3]];
   var connectFn = svgConnector();
 
   var handles = svg.append("g")
     .classed("handles", true)
     .selectAll("rect")
-    .data([[p1,p4], [p2,p3]]);
+    .data(points);
 
   var myConn = svg.append("path").classed("connect", true).attr("d", connectFn(points));
   handles.enter()
@@ -32,6 +32,7 @@
       height: function(d,i) { return d[1][1] - d[0][1];},
       x: function(d,i) { return i==0 ? d[0][0] : d[0][0]; },
       y: function(d,i) { return d[0][1]; },
+      cursor: "move",
       class: function(d,i) { return i==0 ? "left" : "right" }
         })
     .style({
@@ -46,15 +47,15 @@
             var handle = d3.select(this);
             handle.attr("x", d.x).attr("y", d.y);
             if (handle.classed("left")) {
-              points[0][0] += d3.event.dx;
-              points[0][1] += d3.event.dy;
-              points[3][0] += d3.event.dx;
-              points[3][1] += d3.event.dy;
+              points[0][0][0] += d3.event.dx;
+              points[0][0][1] += d3.event.dy;
+              points[0][1][0] += d3.event.dx;
+              points[0][1][1] += d3.event.dy;
             } else {
-              points[1][0] += d3.event.dx;
-              points[1][1] += d3.event.dy;
-              points[2][0] += d3.event.dx;
-              points[2][1] += d3.event.dy;
+              points[1][0][0] += d3.event.dx;
+              points[1][0][1] += d3.event.dy;
+              points[1][1][0] += d3.event.dx;
+              points[1][1][1] += d3.event.dy;
             }
             myConn.attr("d", connectFn(points));
           }));
