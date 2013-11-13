@@ -10,6 +10,24 @@
 <h1 id="title">svg-connect-area</h1>
 <p>Javascript library for creating join areas for four points</p>
 <p>Drag the grey handles around.</p>
+<div class="radio">
+  <label>
+    <input type="radio" name="optionsRadios" id="optionsRadios1" value="vertical-curve" checked>
+    S-Curve
+  </label>
+</div>
+<div class="radio">
+  <label>
+    <input type="radio" name="optionsRadios" id="optionsRadios2" value="linear-step">
+    Linear-step
+  </label>
+</div>
+<div class="radio">
+  <label>
+    <input type="radio" name="optionsRadios" id="optionsRadios3" value="linear">
+    Linear
+  </label>
+</div>
 <a href="https://github.com/trinary/svg-connect-area">Github Project Here</a>
 
 <script id="live-reload" src="http://localhost:35729/livereload.js"></script>
@@ -25,6 +43,13 @@
     .classed("handles", true)
     .selectAll("rect")
     .data(points);
+
+
+  var radio = d3.selectAll(".radio").on("change", function(d) { 
+      var value = d3.event.target.value;
+      connectFn = connectFn.type(value);
+      myConn.attr("d", connectFn(points));
+    });
 
   var myConn = svg.append("path").classed("connect", true).attr("d", connectFn(points));
   handles.enter()
