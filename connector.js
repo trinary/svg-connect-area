@@ -40,11 +40,6 @@
 
   function svg_connector_vertical_curve(d) {
     var first = d[0], second = d[1];
-    var breakpoint = 0.3;
-    if( second[1][1] > first[0][1]) {
-      // switch break to prevent overlap
-      breakpoint = 0.6;
-    }
 
     return "M " + first[0] + 
       " Q " + alongX(first[0], second[0], 0.5) + " " + first[0][1] + " " + alongXY(first[0], second[0], 0.5) + 
