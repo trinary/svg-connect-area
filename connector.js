@@ -38,9 +38,29 @@
       " L " + first[1] + " Z";
   }
 
+  function svg_connector_vertical_curve(d) {
+    var first = d[0], second = d[1];
+    var breakpoint = 0.3;
+    if( second[1][1] > first[0][1]) {
+      // switch break to prevent overlap
+      breakpoint = 0.6;
+    }
+
+    return "M " + first[0] + 
+      " Q " + alongX(first[0], second[0], 0.5) + " " + first[0][1] + " " + alongXY(first[0], second[0], 0.5) + 
+      " T " + second[0] + 
+      " L " + second[1] + 
+      " Q " + alongX(second[1], first[1], 0.5) + " " + second[1][1] + " " + alongXY(second[1], first[1], 0.5) + 
+      " T " + first[1] + 
+      " Z ";
+      
+
+  }
+
   function svg_connector() {
     var connectTypes = { "linear-step": svg_connector_linear_step,
-                        "linear": svg_connector_linear } ;
+                        "linear": svg_connector_linear,
+                        "vertical-curve": svg_connector_vertical_curve } ;
     var connectFn = svg_connector_linear_step;
     var xFn = function(point) { return point[0]; },
         yFn = function(point) { return point[1]; };
