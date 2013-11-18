@@ -9,6 +9,7 @@
 
 <h1 id="title">svg-connect-area</h1>
 <p>Javascript library for creating join areas for four points</p>
+<a href="https://github.com/trinary/svg-connect-area">Github Project</a>
 <p>Drag the grey handles around.</p>
 <div class="radio">
   <label>
@@ -28,13 +29,16 @@
     Linear
   </label>
 </div>
-<a href="https://github.com/trinary/svg-connect-area">Github Project Here</a>
+<br/>
+<div class="svg-container">
+</div>
 
 <script id="live-reload" src="http://localhost:35729/livereload.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="connector.js"></script>
 <script>
-  var svg = d3.select("body").append("svg");
+  var svg = d3.select(".svg-container").append("svg");
+  svg.attr("width", "100%").attr("height", 640);
   var p1 = [30,10], p2 = [300,80], p3 = [300,300], p4 = [30,120];
   var points = [[p1,p4], [p2,p3]];
   var connectFn = svgConnector().type("vertical-curve");
