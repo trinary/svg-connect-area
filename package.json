@@ -1,7 +1,8 @@
 {
-  "name": "svg-curved-area",
-  "version": "0.0.0",
-  "description": "javascript library for creating s-shaped curves to join four points",
+  "name": "svg-connect-area",
+  "version": "0.0.1",
+  "main": "connector.js",
+  "description": "javascript library for creating areas to join four points",
   "scripts": {
     "start": "grunt server",
     "ghpages": "grunt ghpages"
