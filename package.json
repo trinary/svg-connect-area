@@ -1,14 +1,14 @@
 {
   "name": "svg-connect-area",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "connector.js",
   "description": "javascript library for creating areas to join four points",
   "scripts": {
     "start": "grunt server",
     "ghpages": "grunt ghpages"
   },
-  "homepage": "http://github.com/trinary/svg-curved-area",
-  "bugs": "http://github.com/trinary/svg-curved-area/issues",
+  "homepage": "http://github.com/trinary/svg-connect-area",
+  "bugs": "http://github.com/trinary/svg-connect-area/issues",
   "author": {
     "name": "Erik Cunningham",
     "email": "djtrinary@gmail.com",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/trinary/svg-curved-area.git"
+    "url": "git://github.com/trinary/svg-connect-area.git"
   },
   "dependencies": {
 
